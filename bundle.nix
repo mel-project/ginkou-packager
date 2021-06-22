@@ -11,22 +11,21 @@ stdenv.mkDerivation {
 
   buildInputs = [ melwalletd ginkou ginkou-loader ];
   buildCommand = ''
-    # Copy in melwalletd
-    cp ${melwalletd}/bin/melwalletd .
-
     # Copy in js dependencies
     #cp -r ${ginkou}/result/lib/node_modules .
 
-    # Copy in built js
-    mkdir public
-    mkdir public/build
-    cp -r ${ginkou}/ ./public/build
-
-    # Copy in the runtime loader
-    cp ${ginkou-loader}/bin/ .
-
     # Create a run script
-    echo ./ginkou-loader --html_path ./public/build --melwalletd_path ./melwalletd > run.sh
+    echo ./ginkou-loader --html-path ./public --melwalletd-path ./melwalletd > run.sh
+
+    # Copy in the binaries
+    mkdir $out
+    cp ${ginkou-loader}/bin/ginkou-loader $out
+    cp ${melwalletd}/bin/melwalletd $out
     cp run.sh $out
+    chmod 777 $out/run.sh
+
+    # Copy in public & node_modules directories
+    ls -l ${ginkou}
+    cp -r ${ginkou}/* $out
   '';
 }
