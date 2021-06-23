@@ -59,6 +59,7 @@
 
         bundle = pkgs.callPackage ./bundle.nix {
           inherit melwalletd ginkou ginkou-loader;
+          #start-script = ./start-ginkou.sh;
         };
 
         in rec {

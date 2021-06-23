@@ -2,20 +2,25 @@
   system,
   melwalletd,
   ginkou,
-  ginkou-loader
+  ginkou-loader,
+  #start-script
 }:
 
+let
+  start-script = ''
+    SCRIPTPATH=\"\$( cd -- \"\$(dirname \"\$0\")\" >/dev/null 2>&1 ; pwd -P )\"
+    sh \$SCRIPTPATH/ginkou-loader --html-path \$SCRIPTPATH/public --melwalletd-path \$SCRIPTPATH/melwalletd
+  '';
+in
 stdenv.mkDerivation {
   name = "ginkou";
-  inherit system;
+  inherit system start-script;
 
   buildInputs = [ melwalletd ginkou ginkou-loader ];
   buildCommand = ''
-    # Copy in js dependencies
-    #cp -r ${ginkou}/result/lib/node_modules .
-
     # Create a run script
-    echo ./ginkou-loader --html-path ./public --melwalletd-path ./melwalletd > run.sh
+    #echo ./ginkou-loader --html-path ./public --melwalletd-path ./melwalletd > run.sh
+    echo "${start-script}" > run.sh
 
     # Copy in the binaries
     mkdir $out
@@ -25,7 +30,6 @@ stdenv.mkDerivation {
     chmod 777 $out/run.sh
 
     # Copy in public & node_modules directories
-    ls -l ${ginkou}
     cp -r ${ginkou}/* $out
   '';
 }
