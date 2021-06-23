@@ -3,13 +3,13 @@
   melwalletd,
   ginkou,
   ginkou-loader,
-  #start-script
 }:
 
 let
   start-script = ''
+    #! /usr/bin/env bash
     SCRIPTPATH=\"\$( cd -- \"\$(dirname \"\$0\")\" >/dev/null 2>&1 ; pwd -P )\"
-    sh \$SCRIPTPATH/ginkou-loader --html-path \$SCRIPTPATH/public --melwalletd-path \$SCRIPTPATH/melwalletd
+    \$SCRIPTPATH/ginkou-loader --html-path \$SCRIPTPATH/public --melwalletd-path \$SCRIPTPATH/melwalletd
   '';
 in
 stdenv.mkDerivation {
