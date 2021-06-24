@@ -115,6 +115,38 @@
         "type": "github"
       }
     },
+    "ginkou-loader-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624394842,
+        "narHash": "sha256-2H9f1mXR/mmHWpgblhDTQ2pYS3uG4gJbnP6PqwmZ6Vw=",
+        "owner": "themeliolabs",
+        "repo": "ginkou-loader",
+        "rev": "f3eeaa1cd2da8916b7b89a855cc7cb820c60991b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "themeliolabs",
+        "repo": "ginkou-loader",
+        "type": "github"
+      }
+    },
+    "ginkou-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624466308,
+        "narHash": "sha256-0VfnY/v+oeRVPT4cXKTzxE9jy0AHmqoKL+Fy9HIppAA=",
+        "owner": "themeliolabs",
+        "repo": "ginkou",
+        "rev": "323038d29e3d91741332224dd798de0ffbd5da5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "themeliolabs",
+        "repo": "ginkou",
+        "type": "github"
+      }
+    },
     "melwalletd-flake": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -149,6 +181,22 @@
         "owner": "themeliolabs",
         "repo": "melwalletd",
         "rev": "8d2fad7c6ca14d4196d70da39fc73fa79cab109c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "themeliolabs",
+        "repo": "melwalletd",
+        "type": "github"
+      }
+    },
+    "melwalletd-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624487819,
+        "narHash": "sha256-jR1mlREurgIUBfRyeMVK++bDsUHkJWF2waKLMZvULEo=",
+        "owner": "themeliolabs",
+        "repo": "melwalletd",
+        "rev": "7191f09e63ca8fc232f4a0d4cabef1503f292420",
         "type": "github"
       },
       "original": {
@@ -306,7 +354,10 @@
         "flake-utils": "flake-utils",
         "ginkou-flake": "ginkou-flake",
         "ginkou-loader-flake": "ginkou-loader-flake",
+        "ginkou-loader-src": "ginkou-loader-src",
+        "ginkou-src": "ginkou-src",
         "melwalletd-flake": "melwalletd-flake_2",
+        "melwalletd-src": "melwalletd-src",
         "mozilla": "mozilla_4",
         "nixpkgs": "nixpkgs_5"
       }

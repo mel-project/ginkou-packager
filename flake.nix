@@ -8,6 +8,12 @@
   inputs.ginkou-flake.url = "github:themeliolabs/ginkou";
   inputs.ginkou-loader-flake.url = "github:themeliolabs/ginkou-loader";
 
+  # TODO express this more elegantly
+  # Sources
+  inputs.melwalletd-src = { url = "github:themeliolabs/melwalletd"; flake = false; };
+  inputs.ginkou-src = { url = "github:themeliolabs/ginkou"; flake = false; };
+  inputs.ginkou-loader-src = { url = "github:themeliolabs/ginkou-loader"; flake = false; };
+
   outputs =
     { self
     , nixpkgs
@@ -16,6 +22,9 @@
     , melwalletd-flake
     , ginkou-loader-flake
     , ginkou-flake
+    , melwalletd-src
+    , ginkou-loader-src
+    , ginkou-src
     , ...
     } @inputs:
     let
@@ -59,15 +68,34 @@
 
         bundle = pkgs.callPackage ./bundle.nix {
           inherit melwalletd ginkou ginkou-loader;
-          #start-script = ./start-ginkou.sh;
+        };
+
+        debian-bundle = pkgs.callPackage ./debian-bundle.nix {
+          inherit melwalletd ginkou ginkou-loader;
         };
 
         in rec {
           packages.bundle = bundle;
+          packages.debianBundle = debian-bundle;
 
           # Produces ginkou binary and melwalletd linked binary
           defaultPackage = bundle;
 
+          devShell = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              melwalletd
+              ginkou
+              ginkou-loader
+              docker
+            ];
+
+            shellHook = ''
+              cp -r ${melwalletd-src}/ ./melwalletd
+              chmod -R 777 ./melwalletd
+              cp -r ${ginkou-src}/ ./ginkou
+              cp -r ${ginkou-loader-src}/ ./ginkou-loader
+              '';
+          };
           /*
           devShell = pkgs.mkShell {
             buildInputs = with pkgs; [
