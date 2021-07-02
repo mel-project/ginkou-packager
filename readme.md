@@ -1,4 +1,7 @@
 # Build with nix
+*Note that even though nix is used, the resulting binary won't be dependent on
+the nix system*
+
 The nix flake will build the ginkou javascript and place it in the current
 directory. It will also fetch the ginkou-loader and melwalletd sources to the
 current directory. Versions of the projects are tracked in the nix.lock file
